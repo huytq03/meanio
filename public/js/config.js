@@ -17,6 +17,12 @@ angular.module('mean').config(['$routeProvider',
         when('/', {
             templateUrl: 'views/index.html'
         }).
+        when('/vendors', {
+            templateUrl: 'views/vendors/list.html'
+        }).
+        when('/vendors/create', {
+            templateUrl: 'views/vendors/create.html'
+        }).
         otherwise({
             redirectTo: '/'
         });
@@ -29,3 +35,25 @@ angular.module('mean').config(['$locationProvider',
         $locationProvider.hashPrefix("!");
     }
 ]);
+
+//translation
+angular.module('mean').config(['$translateProvider', function ($translateProvider) {
+
+    $translateProvider.translations('en_EN', {
+        'NAME': 'Name',
+        'ADDRESS': 'Address',
+        'EMAIL': 'Email',
+        'HOMEPHONE': 'Home Phone',
+        'PHONE': 'Phone'
+    });   
+
+    $translateProvider.translations('vn_VN', {
+        'NAME': 'ten',
+        'ADDRESS': 'dia chi',
+        'EMAIL': 'email',
+        'HOMEPHONE': 'dien thoai ban',
+        'PHONE': 'di dong'
+    });   
+    
+    $translateProvider.uses('en_EN');
+}]);

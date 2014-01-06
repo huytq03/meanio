@@ -31,3 +31,15 @@ exports.article = {
         next();
     }
 };
+
+/**
+ * Vendor authorizations routing middleware
+ */
+exports.vendor = {
+    hasAuthorization: function(req, res, next) {
+        if (req.vendor.user.id != req.user.id) {
+            return res.send(401, 'User is not authorized');
+        }
+        next();
+    }
+};

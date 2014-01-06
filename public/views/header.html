@@ -26,3 +26,8 @@
         </li>
     </ul>
 </div>
+
+<div class="alert alert-block alert-{{notification.get().type}}" data-ng-show="notification.get().body">
+    <h4>{{notification.get().title}}</h4>
+    <p>{{notification.get().body}}</p>
+</div>

@@ -67,6 +67,14 @@ module.exports = function(app, passport, auth) {
     app.put('/articles/:articleId', auth.requiresLogin, auth.article.hasAuthorization, articles.update);
     app.del('/articles/:articleId', auth.requiresLogin, auth.article.hasAuthorization, articles.destroy);
 
+    //vendors 
+     var vendors = require('../app/controllers/vendors');
+    app.get('/vendors', vendors.all);
+    app.post('/vendors', auth.requiresLogin, vendors.create);
+    app.get('/vendors/:vendorId', articles.show);
+    app.put('/vendors/:vendorId', auth.requiresLogin, auth.vendor.hasAuthorization, vendors.update);
+    app.del('/vendors/:vendorId', auth.requiresLogin, auth.vendor.hasAuthorization, vendors.destroy);
+
     //Finish with setting up the articleId param
     app.param('articleId', articles.article);
 

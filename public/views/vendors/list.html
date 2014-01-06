@@ -1,0 +1,19 @@
+<section data-ng-controller="VendorsController" data-ng-init="init()">
+<table class="table" data-ng-table="tableParams" data-show-filter="true">
+	<thead>
+		<th>{{ 'NAME' | translate }}</th>
+		<th>{{ 'ADDRESS' | translate }}</th>
+		<th>{{ 'EMAIL' | translate }}</th>
+		<th>{{ 'HOMEPHONE' | translate }}</th>
+		<th>{{ 'PHONE' | translate }}</th>
+	</thead>
+        <tr data-ng-repeat="vendor in vendors">
+            <td data-title="'Name'" filter="{ 'name': 'text' }" >{{vendor.name}}</td>
+            <td data-title="'Address'">{{vendor.address}}</td>
+            <td data-title="'Email'">{{vendor.email}}</td>
+            <td data-title="'Home Phone'">{{vendor.homePhone}}</td>
+            <td data-title="'Phone'">{{vendor.phone}}</td>
+        </tr>
+        </table>
+	<h1 data-ng-hide="!vendors || vendors.length">No vendors yet. <br> Why don't you <a href="/#!/vendors/create">Create One</a>?</h1>
+</section>
