@@ -1,0 +1,3 @@
+<ul class="nav nav-list" >
+	<li data-ng-repeat="item in submenu" data-ng-show="global.user" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}" > <a  href="#!/{{item.link}}">{{item.title | translate}}</a> </li>
+</ul>

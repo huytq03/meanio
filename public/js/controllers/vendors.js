@@ -1,4 +1,4 @@
-angular.module('mean.vendors').controller('VendorsController', ['$scope', 'Global', 'Vendors', function ($scope, Global, Vendors, ngTableParams) {
+angular.module('mean.vendors').controller('VendorsController', ['$scope', 'Global', '$filter', 'Vendors','ngTableParams','$translate', function ($scope, Global,$filter, Vendors, ngTableParams, $translate) {
     $scope.global = Global;
     $scope.vendors = [];
     $scope.create = function() {
@@ -28,26 +28,32 @@ angular.module('mean.vendors').controller('VendorsController', ['$scope', 'Globa
 
     $scope.init = function() {
         Vendors.query(function(vendors) {
-            $scope.vendors = vendors;
+            //$scope.vendors = vendors;
             $scope.tableParams = new ngTableParams({
                 page: 1,            // show first page
                 count: 10,          // count per page
                 filter: {
                     name: ''       // initial filter
+                },
+                sorting: {
+                    name: 'asc'     // initial sorting
                 }
             }, {
                 total: vendors.length, // length of data
                 getData: function($defer, params) {
-                    // use build-in angular filter
-                    var orderedData = params.filter() ?
-                           $filter('filter')(vendors, params.filter()) :
-                           vendors;
-                    $scope.users = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    params.total(orderedData.length); // set total for recalc pagination
-                    $defer.resolve($scope.users);
+                   // use build-in angular filter
+                    var filteredData = params.filter() ?
+                            $filter('filter')(vendors, params.filter()) :
+                            vendors;
+                    var orderedData = params.sorting() ?
+                            $filter('orderBy')(filteredData, params.orderBy()) :
+                            vendors;
+                    params.total(orderedData.length); // set total for recalc pagination        
+                    $scope.vendors = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    $defer.resolve($scope.vendors);
                 }
             });
-            notification.success('qua', 'hay');      
+            notification.success('VendorsController', $translate('LOADSUCCESS'));    
         });
     };
     

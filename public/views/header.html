@@ -1,17 +1,18 @@
-<div class="navbar-inner" data-ng-controller="HeaderController">
+<div class="navbar-inner">
     <ul class="nav">
         <li>
-            <a class="brand" href="/">MEAN - A Modern Stack</a>
+            <a class="brand" href="/">{{ 'HOME' | translate }}</a>
         </li>
-        <li data-ng-repeat="item in menu" data-ng-show="global.user" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
-            <a href="#!/{{item.link}}">{{item.title}}</a>
+        <li data-ng-repeat="item in menu" data-ng-show="global.user" ng-class="{active: item.active}" class="menu-item" >
+            <img src="/{{item.icon}}">
+            <a href="" data-ng-click="navigation(item)">{{item.title | translate}}</a>
         </li>
-    </ul>
+    </ul>   
     <ul class="nav pull-right" data-ng-hide="global.authenticated">
-        <li><a href="signup">Signup</a>
+        <li><a href="signup">{{ 'SIGNUP' | translate }}</a>
         </li>
         <li class="divider-vertical"></li>
-        <li><a href="signin">Signin</a>
+        <li><a href="signin">{{ 'SIGNIN' | translate }}</a>
         </li>
     </ul>
     <ul class="nav pull-right" data-ng-show="global.authenticated">
@@ -20,7 +21,18 @@
 				{{global.user.name}} <b class="caret"></b>
 			</a>
             <ul class="dropdown-menu">
-                <li><a href="/signout">Signout</a>
+                <li><a href="/signout">{{ 'SIGNOUT' | translate }}</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+     <ul class="nav pull-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {{ 'LANGUAGE' | translate }} <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li data-ng-repeat="lang in languages" ><a data-ng-click="changeLanguale(lang)">{{ lang | translate }}</a>
                 </li>
             </ul>
         </li>

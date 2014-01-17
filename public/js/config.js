@@ -37,14 +37,26 @@ angular.module('mean').config(['$locationProvider',
 ]);
 
 //translation
-angular.module('mean').config(['$translateProvider', function ($translateProvider) {
+angular.module('mean').config(['$translateProvider',function ($translateProvider) {
 
     $translateProvider.translations('en_EN', {
         'NAME': 'Name',
         'ADDRESS': 'Address',
         'EMAIL': 'Email',
         'HOMEPHONE': 'Home Phone',
-        'PHONE': 'Phone'
+        'PHONE': 'Phone',
+        'ARTICLES' : 'Articles',
+        'VENDOR' : 'vendor',
+        'HOME' : 'Home',
+        'en_EN' : 'English',
+        'vn_VN' : 'vietnames',
+        'LANGUAGE' : 'Language',
+        'SIGNUP' : 'Signup',
+        'SIGNIN' : 'Signin',
+        'SIGNOUT' : 'Sigout',
+        'LOADSUCCESS' : 'Load successfully',
+        'STORE' :'Store',
+        'CUSTOMERS' : 'Customers'
     });   
 
     $translateProvider.translations('vn_VN', {
@@ -52,8 +64,17 @@ angular.module('mean').config(['$translateProvider', function ($translateProvide
         'ADDRESS': 'dia chi',
         'EMAIL': 'email',
         'HOMEPHONE': 'dien thoai ban',
-        'PHONE': 'di dong'
+        'PHONE': 'di dong',        
+        'ARTICLES' : 'bai viet',
+        'VENDOR' : 'nha cung cap',
+        'HOME' : 'nha',        
+        'en_EN' : 'tieng anh',
+        'vn_VN' : 'tieng viet',
+        'LANGUAGE' : 'ngon ngu',
+        'SIGNUP' : 'dang ky',
+        'SIGNIN' : 'dang nhap',
+        'SIGNOUT' : 'dang xuat',
+        'CUSTOMERS' : 'khach hang'
     });   
     
-    $translateProvider.uses('en_EN');
 }]);

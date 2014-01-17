@@ -7,7 +7,8 @@ angular.module('mean.system').factory("Global", [
             authenticated: !! window.user,
             //huytq Hard code global data
             showPage : 1,
-            itemsPerPage : 10
+            itemsPerPage : 10,
+            languages : ['en_EN','vn_VN']
             //end huytq
         };
        
