@@ -1,7 +1,8 @@
 <section data-ng-controller="VendorsController" data-ng-init="init()">
+<a href="/#!/vendors/create" class="btn btn-success"><i class="icon-white icon-plus"></i> {{'ADD'|translate}} </a>
 <table class="table" data-ng-table="tableParams" data-show-filter="true">
         <tr data-ng-repeat="vendor in vendors">
-            <td data-title="'Name'" header-class="text-left" sortable="'name'" filter="{ 'name': 'text' }" >{{vendor.name}}</td>
+            <td data-title="'Name'" header-class="text-left" sortable="'name'" filter="{ 'name': 'text' }" ><a href="#!/vendors/{{vendor._id}}">{{vendor.name}} </a></td>
             <td data-title="'Address'" header-class="text-left">{{vendor.address}}</td>
             <td data-title="'Email'" header-class="text-left">{{vendor.email}}</td>
             <td data-title="'Home Phone'" header-class="text-left">{{vendor.homePhone}}</td>

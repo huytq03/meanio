@@ -1,8 +1,8 @@
 <div class="navbar-inner">
-    <ul class="nav">
+    <ul class="nav"><!-- 
         <li>
             <a class="brand" href="/">{{ 'HOME' | translate }}</a>
-        </li>
+        </li> -->
         <li data-ng-repeat="item in menu" data-ng-show="global.user" ng-class="{active: item.active}" class="menu-item" >
             <img src="/{{item.icon}}">
             <a href="" data-ng-click="navigation(item)">{{item.title | translate}}</a>

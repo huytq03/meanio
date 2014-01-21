@@ -21,7 +21,10 @@ angular.module('mean').config(['$routeProvider',
             templateUrl: 'views/vendors/list.html'
         }).
         when('/vendors/create', {
-            templateUrl: 'views/vendors/create.html'
+            templateUrl: 'views/vendors/createOrEdit.html'
+        }).
+        when('/vendors/:vendorId', {
+            templateUrl: 'views/vendors/createOrEdit.html'
         }).
         otherwise({
             redirectTo: '/'

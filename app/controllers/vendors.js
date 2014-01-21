@@ -7,19 +7,19 @@ var mongoose = require('mongoose'),
 
 
 /**
- * Find article by id
+ * Find vendor by id
  */
-exports.article = function(req, res, next, id) {
-    Article.load(id, function(err, article) {
+exports.vendor = function(req, res, next, id) {
+    Vendor.load(id, function(err, vendor) {
         if (err) return next(err);
-        if (!article) return next(new Error('Failed to load article ' + id));
-        req.article = article;
+        if (!vendor) return next(new Error('Failed to load vendor ' + id));
+        req.vendor = vendor;
         next();
     });
 };
 
 /**
- * Create a article
+ * Create a vendor
  */
 exports.create = function(req, res) {
     var vendor = new Vendor(req.body);
@@ -38,7 +38,7 @@ exports.create = function(req, res) {
 };
 
 /**
- * Update a article
+ * Update a vendor
  */
 exports.update = function(req, res) {
     var vendor = req.vendor;
@@ -52,7 +52,7 @@ exports.update = function(req, res) {
 };
 
 /**
- * Delete an article
+ * Delete an vendor
  */
 exports.destroy = function(req, res) {
     var vendor = req.vendor;
@@ -69,17 +69,17 @@ exports.destroy = function(req, res) {
 };
 
 /**
- * Show an article
+ * Show an vendor
  */
 exports.show = function(req, res) {
     res.jsonp(req.vendor);
 };
 
 /**
- * List of Articles
+ * List of vendors
  */
 exports.all = function(req, res) {
-    Vendor.find().sort('-created').exec(function(err, vendors) {
+    Vendor.find().sort('-created').populate('createdBy', 'name username').populate('updatedBy', 'name username').exec(function(err, vendors) {
         if (err) {
             res.render('error', {
                 status: 500

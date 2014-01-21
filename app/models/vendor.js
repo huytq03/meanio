@@ -22,11 +22,6 @@ var VendorSchema = new Schema({
         default: '',
         trim: true
     },
-    homePhone: {
-        type: String,
-        default: '',
-        trim: true
-    },
     email: {
         type: String,
         default: '',
@@ -36,6 +31,21 @@ var VendorSchema = new Schema({
         type: String,
         default: '',        
         required:true,
+        trim: true
+    },
+    website: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    bankAcc: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    bank: {
+        type: String,
+        default: '',
         trim: true
     },
     created: {
@@ -82,7 +92,7 @@ var VendorSchema = new Schema({
 VendorSchema.statics.load = function(id, cb) {
     this.findOne({
         _id: id
-    }).populate('createdBy', 'name createdBy').populate('updatedBy', 'name updatedBy').exec(cb);
+    }).populate('createdBy', 'name username').populate('updatedBy', 'name username').exec(cb);
 };
 
 mongoose.model('Vendor', VendorSchema);

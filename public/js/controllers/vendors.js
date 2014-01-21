@@ -1,25 +1,52 @@
-angular.module('mean.vendors').controller('VendorsController', ['$scope', 'Global', '$filter', 'Vendors','ngTableParams','$translate', function ($scope, Global,$filter, Vendors, ngTableParams, $translate) {
+angular.module('mean.vendors').controller('VendorsController', ['$scope', '$routeParams', 'Global', '$filter', 'Vendors','ngTableParams','$translate', '$location' ,'$dialogs', function ($scope, $routeParams, Global,$filter, Vendors, ngTableParams, $translate, $location, $dialogs) {
     $scope.global = Global;
     $scope.vendors = [];
-    $scope.create = function() {
-        var vendor = new Vendors({
-            name: this.name,
-            phone: this.phone,
-            homePhone: this.homePhone,
-            email: this.email,
-            address: this.address
-        });
-        vendor.$save(function(response) {
+     
+    $scope.save = function() {
+        // var vendor = new Vendors({
+        //     name: this.name,
+        //     address: this.address,
+        //     email: this.email,
+        //     phone: this.phone,
+        //     bankAcc: this.bankAcc,
+        //     bank: this.bank,
+        //     website: this.website
+        // });
+        if($scope.vendor._id == undefined) {
+        $scope.vendor.$save(function(response) {
             if(response.errors == undefined) {
-                $location.path("vendors/" + response._id);
-                notification.success('hay', 'qua');
+                $location.path("vendors");
+                notification.success('VendorsController', $translate('SAVESUCCESS'));
             }
 
         });
+        } else {
+        $scope.vendor.$update(function(response) {
+            $location.path("vendors");
+            notification.success('VendorsController', $translate('SAVESUCCESS'));
+        });
+    }
     };
 
-    $scope.remove = function(article) {
-      
+    $scope.delete = function(vendor) {
+      dlg = $dialogs.confirm($translate('CONFIRMHEADER'),$translate('CONFIRMMESSAGE'));
+        dlg.result.then(function(btn){
+            if (vendor) {
+                vendor.$remove();  
+
+                for (var i in $scope.vendors) {
+                    if ($scope.vendors[i] == vendor) {
+                        $scope.vendors.splice(i, 1);
+                    }
+                }
+            }
+            else {
+                $scope.vendor.$remove();
+                $location.path('vendors');
+            }
+        },function(btn){
+          //closed box normally
+        });
     };
 
     $scope.update = function() {
@@ -28,7 +55,6 @@ angular.module('mean.vendors').controller('VendorsController', ['$scope', 'Globa
 
     $scope.init = function() {
         Vendors.query(function(vendors) {
-            //$scope.vendors = vendors;
             $scope.tableParams = new ngTableParams({
                 page: 1,            // show first page
                 count: 10,          // count per page
@@ -58,7 +84,15 @@ angular.module('mean.vendors').controller('VendorsController', ['$scope', 'Globa
     };
     
     $scope.findOne = function() {
-        
+        if($routeParams.vendorId == undefined) {
+            $scope.vendor = new Vendors();
+        } else {
+            Vendors.get({
+                vendorId: $routeParams.vendorId
+            }, function(vendor) {
+                $scope.vendor = vendor;
+            });
+    }
     };
 
     

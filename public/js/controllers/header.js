@@ -2,10 +2,15 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
     $scope.global = Global;
 
     $scope.menu = [{
+        "title": "HOME",
+        "link": "/",
+        "active" : true,
+        "icon" : "../img/icons/home.png"
+    },{
         "title": "ARTICLES",
         "link": "articles",
         "active" : false,
-        "icon" : "../img/icons/customers.png"
+        "icon" : "../img/icons/articles.png"
     },
     {
         "title": "CUSTOMERS",
@@ -44,7 +49,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
         });
         item.active = true;
         menu = [];
-        link = '';
+        link = '/';
         $scope.submenus.forEach(function(value) { 
             if(value.parent == item.title) {
                 menu.push(value);

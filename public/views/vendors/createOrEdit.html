@@ -1,0 +1,52 @@
+<section data-ng-controller="VendorsController" data-ng-init="findOne()">
+	<form class="form-horizontal">
+		<div class="control-group">
+			<label class="control-label" for="name">{{'NAME'|translate}}</label>
+			<div class="controls">
+				<input type="text" data-ng-model="vendor.name" id="name"  required>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="address">{{'ADDRESS'|translate}}</label>
+			<div class="controls">
+				<input type="text" data-ng-model="vendor.address" id="address"  required>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="email">{{'EMAIL'|translate}}</label>
+			<div class="controls">
+				<input type="email" data-ng-model="vendor.email" id="email" >
+			</div>
+		</div>		
+		<div class="control-group">
+			<label class="control-label" for="phone">{{'PHONE'|translate}}</label>
+			<div class="controls">
+				<input type="number" data-ng-model="vendor.phone" id="phone"  required>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="bankAcc">{{'BANKACCOUNT'|translate}}</label>
+			<div class="controls">
+				<input type="number" data-ng-model="vendor.bankAcc" id="bankAcc"  >
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="bank">{{'BANK'|translate}}</label>
+			<div class="controls">
+				<input type="text" data-ng-model="vendor.bank" id="bank"  >
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="website"> {{'WEBSITE'|translate}} </label>
+			<div class="controls">
+				<input type="text" data-ng-model="vendor.website" id="website"  >
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<button class="btn btn-success" data-ng-click="save(vendor)">{{'SAVE'|translate}}</button>
+				<button class="btn btn-danger" ng-hide="!vendor._id" data-ng-click="delete(vendor)" ><i class="icon-white icon-remove"></i>{{'DELETE'|translate}}</button>
+			</div>
+		</div>
+	</form>
+</section>
