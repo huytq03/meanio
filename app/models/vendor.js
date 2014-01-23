@@ -18,7 +18,7 @@ var VendorSchema = new Schema({
         trim: true
     },
     phone: {
-        type: String,
+        type: Number,
         default: '',
         trim: true
     },
@@ -39,7 +39,7 @@ var VendorSchema = new Schema({
         trim: true
     },
     bankAcc: {
-        type: String,
+        type: Number,
         default: '',
         trim: true
     },
@@ -49,13 +49,11 @@ var VendorSchema = new Schema({
         trim: true
     },
     created: {
-        type: Date,
-        required:true,
-        default: Date.now
+        type: Number,
+        required:true
     },
     updated: {
-        type: Date,
-        default: Date.now,
+        type: Number,
         required:true
     },
     createdBy: {

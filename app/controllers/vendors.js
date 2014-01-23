@@ -27,9 +27,9 @@ exports.create = function(req, res) {
 
     vendor.save(function(err) {
         if (err) {
-            return res.send('users/signup', {
-                errors: err.errors,
-                vendor: vendor
+            return res.render('error', {
+                status: 500,
+                error: err
             });
         } else {
             res.jsonp(vendor);
@@ -45,9 +45,16 @@ exports.update = function(req, res) {
 
     vendor = _.extend(vendor, req.body);
     vendor.updatedBy = req.user;
-    vendor.updated = Date.now;
+    //vendor.updated = Date.now;
     vendor.save(function(err) {
-        res.jsonp(vendor);
+        if (err) {
+            res.render('error', {
+                status: 500,
+                error: err
+            });
+        } else {
+            res.jsonp(vendor);
+        }
     });
 };
 
@@ -60,7 +67,8 @@ exports.destroy = function(req, res) {
     vendor.remove(function(err) {
         if (err) {
             res.render('error', {
-                status: 500
+                status: 500,
+                error: err
             });
         } else {
             res.jsonp(vendor);
@@ -82,7 +90,8 @@ exports.all = function(req, res) {
     Vendor.find().sort('-created').populate('createdBy', 'name username').populate('updatedBy', 'name username').exec(function(err, vendors) {
         if (err) {
             res.render('error', {
-                status: 500
+                status: 500,
+                error: err
             });
         } else {
             res.jsonp(vendors);
