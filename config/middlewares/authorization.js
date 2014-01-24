@@ -44,3 +44,13 @@ exports.vendor = {
         next();
     }
 };
+
+/**
+ * Category authorizations routing middleware
+ */
+exports.category = {
+    hasAuthorization: function(req, res, next) {
+        //allways pass
+        next();
+    }
+};

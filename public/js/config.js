@@ -26,6 +26,15 @@ angular.module('mean').config(['$routeProvider',
         when('/vendors/:vendorId', {
             templateUrl: 'views/vendors/createOrEdit.html'
         }).
+        when('/categories', {
+            templateUrl: 'views/categories/list.html'
+        }).
+        // when('/categories/create/:parentId', {
+        //     templateUrl: 'views/categories/create.html'
+        // }).
+        when('/categories/:categoryId', {
+            templateUrl: 'views/categories/edit.html'
+        }).
         otherwise({
             redirectTo: '/'
         });

@@ -6,6 +6,11 @@
             <td data-title="'Address'" header-class="text-left">{{vendor.address}}</td>
             <td data-title="'Email'" header-class="text-left">{{vendor.email}}</td>
             <td data-title="'Phone'" header-class="text-left">{{vendor.phone}}</td>
+            <td>
+            	<a href="#!/vendors/{{vendor._id}}" class="btn btn-warning btn-mini"><i class="icon-white icon-pencil"></i> {{'EDIT'| translate}}</a>
+            	<button class="btn btn-danger btn-mini" data-ng-click="delete(vendor)"><i class="icon-white icon-remove"></i>{{'DELETE'|translate}}</button>
+
+            </td>
         </tr>
         </table>	
 </section>

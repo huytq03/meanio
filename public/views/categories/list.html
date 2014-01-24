@@ -1,0 +1,14 @@
+<section data-ng-controller="CategoriesController" data-ng-init="init(null)">
+<button data-ng-click="create()" class="btn btn-success"><i class="icon-white icon-plus"></i> {{'ADD'|translate}} </button>
+<table class="table" data-ng-table="tableParams" data-show-filter="true">
+        <tr data-ng-repeat="category in categories">
+            <td data-title="'Name'" header-class="text-left" sortable="'name'" filter="{ 'name': 'text' }" ><a href="#!/categories/{{category._id}}">{{category.name}} </a></td>
+            <td data-title="'Description'" header-class="text-left">{{category.description}}</td>
+            <td>
+            	<a href="#!/categories/{{category._id}}" class="btn btn-warning btn-mini"><i class="icon-white icon-pencil"></i> {{'EDIT'| translate}}</a>
+            	<button class="btn btn-danger btn-mini" data-ng-click="remove(category)"><i class="icon-white icon-remove"></i>{{'DELETE'|translate}}</button>
+
+            </td>
+        </tr>
+        </table>	
+</section>

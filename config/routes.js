@@ -68,17 +68,26 @@ module.exports = function(app, passport, auth) {
     app.del('/articles/:articleId', auth.requiresLogin, auth.article.hasAuthorization, articles.destroy);
 
     //vendors 
-     var vendors = require('../app/controllers/vendors');
+    var vendors = require('../app/controllers/vendors');
     app.get('/vendors', vendors.all);
     app.post('/vendors', auth.requiresLogin, vendors.create);
     app.get('/vendors/:vendorId', vendors.show);
     app.put('/vendors/:vendorId', auth.requiresLogin, auth.vendor.hasAuthorization, vendors.update);
     app.del('/vendors/:vendorId', auth.requiresLogin, auth.vendor.hasAuthorization, vendors.destroy);
 
+    //categories 
+    var categories = require('../app/controllers/categories');
+    app.get('/categories', categories.all);
+    app.post('/categories', auth.requiresLogin, categories.create);
+    app.get('/categories/:categoryId', categories.show);
+    app.put('/categories/:categoryId', auth.requiresLogin, auth.category.hasAuthorization, categories.update);
+    app.del('/categories/:categoryId', auth.requiresLogin, auth.category.hasAuthorization, categories.destroy);
+
     //Finish with setting up the articleId param
     app.param('articleId', articles.article);
     app.param('vendorId', vendors.vendor);
-
+    app.param('categoryId', categories.category);
+    
     //Home route
     var index = require('../app/controllers/index');
     app.get('/', index.render);

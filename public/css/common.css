@@ -210,3 +210,12 @@ footer p {
 .menu-item {
   display: -webkit-inline-flex;
 }
+
+.form-textarea {
+  margin-left: 20px;
+  width: 470px;
+}
+
+.form-text {
+  margin-left: 20px;
+}

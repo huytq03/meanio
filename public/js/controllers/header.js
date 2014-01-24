@@ -17,6 +17,12 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
         "link": "VENDOR",
         "active" : false,
         "icon" : "../img/icons/customers.png"
+    },
+    {
+        "title": "STORE",
+        "link": "CATEGORY",
+        "active" : false,
+        "icon" : "../img/icons/store.png"
     }
     ];
     $scope.submenus = [{
@@ -27,6 +33,10 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
                 "title": "VENDOR",
                 "link": "vendors",
                 "parent" : "CUSTOMERS"
+            }, {
+                "title": "CATEGORY",
+                "link": "categories",
+                "parent" : "STORE"
             }];
     $scope.submenu = [];        
     $scope.languages = Global.languages;
