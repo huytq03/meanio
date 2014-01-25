@@ -22,6 +22,11 @@ var CategorySchema = new Schema({
         default: '',
         trim: true
     },
+    parentId: {
+        type: String,
+        default: '-1',
+        trim: true
+    },
     created: {
         type: Number,
         required:true

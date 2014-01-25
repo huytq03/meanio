@@ -3,82 +3,72 @@ angular.module('mean.categories').controller('CategoriesController', ['$scope', 
         $scope.global = Global;
         $scope.categories = [];
 
-        $scope.create = function () {
-            dlg = $dialogs.create('/views/categories/create.html','CategoriesController',{},{});
-            dlg.result.then(function(data){
-              $scope.name = data;
-            },function(){
-              $scope.name = 'You decided not to enter in your name, that makes me sad.';
+        $scope.create = function (category) {
+            dlg = $dialogs.create('/views/categories/create.html', 'CategoriesController', {}, {});
+            dlg.result.then(function (newCateogry) {
+                if (category) {
+                    newCateogry.parentId = category._id;
+                }
+                newCateogry.$save(function (response) {
+                    $scope.categories.push(response);
+                }, function (error) {
+                    $dialogs.error('server error when save');
+                });
+            }, function () {
+                $scope.name = 'You decided not to enter in your name, that makes me sad.';
             });
-
-            // var category = new Categories({
-            //     title: this.title,
-            //     content: this.content
-            // });
-            // category.$save(function (response) {
-            //     $location.path("categories/" + response._id);
-            // });
-
-            // this.title = "";
-            // this.content = "";
         };
 
         $scope.cancel = function () {
-            $modalStack.getTop().key.dismiss('canceled');  
+            $modalStack.getTop().key.dismiss('canceled');
         };
-        
-        $scope.save = function () {
-            $modalStack.getTop().key.close();
 
+        $scope.save = function (a, b) {
             var category = new Categories({
                 name: this.name,
                 description: this.description,
-                created : new Date().getTime(),
-                updated : new Date().getTime()
-                });
-            category.$save(function(response) {
-                $location.path("categories");
-            },function(error) {
-                $dialogs.error('server error when save');
+                created: new Date().getTime(),
+                updated: new Date().getTime(),
+                parentId: '-1'
             });
+            $modalStack.getTop().key.close(category);
         };
 
         $scope.remove = function (category) {
             dlg = $dialogs.confirm($translate('CONFIRMHEADER'), $translate('CONFIRMMESSAGE'));
             dlg.result.then(function (btn) {
-                if (!category) {
-                    category = $scope.category;
-                }
-                category.$remove(function (value) {
-                    for (var i in $scope.categories) {
-                        if ($scope.categories[i] == $scope.category) {
-                            $scope.categories.splice(i, 1);
-                        }
+                    if (!category) {
+                        category = $scope.category;
                     }
-                    $location.path('categories');
-                }, function (err) {
-                    $dialogs.error('server error when delete');
+                    category.$remove(function (value) {
+                        for (var i in $scope.categories) {
+                            if ($scope.categories[i] == category) {
+                                $scope.categories.splice(i, 1);
+                            }
+                        }
+                    }, function (err) {
+                        $dialogs.error('server error when delete');
+                    });
+                },
+                function (btn) {
+                    //closed box normally
                 });
-            },
-            function (btn) {
-                //closed box normally
-            });
-            
+
         };
 
         $scope.update = function () {
             var category = $scope.category;
-            if (!category.updated) {
-                category.updated = [];
-            }
-            category.updated.push(new Date().getTime());
+            
+            category.updated = new Date().getTime();
 
             category.$update(function () {
                 $location.path('categories/' + category._id);
-            });
+            }, function (err) {
+                        $dialogs.error('server error when delete');
+                    });
         };
 
-        $scope.init = function () {
+        $scope.init = function (parentId) {
             Categories.query(function (categories) {
                 $scope.tableParams = new ngTableParams({
                     page: 1, // show first page
@@ -92,6 +82,7 @@ angular.module('mean.categories').controller('CategoriesController', ['$scope', 
                 }, {
                     total: categories.length, // length of data
                     getData: function ($defer, params) {
+                        categories = $filter('filter')(categories, {parentId: parentId});//load parent only
                         // use build-in angular filter
                         var filteredData = params.filter() ?
                             $filter('filter')(categories, params.filter()) :
@@ -115,6 +106,9 @@ angular.module('mean.categories').controller('CategoriesController', ['$scope', 
                 categoryId: $routeParams.categoryId
             }, function (category) {
                 $scope.category = category;
+                $scope.init(category._id);           
+            }, function (err) {
+                $dialogs.error('server error when findOne');
             });
         };
     }

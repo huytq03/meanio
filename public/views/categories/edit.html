@@ -14,18 +14,19 @@
 		</div>		
 		<div class="control-group">
 			<div class="controls">
-				<button class="btn btn-success" data-ng-click="save(category)">{{'SAVE'|translate}}</button>
-				<button class="btn btn-danger" ng-hide="!category._id" data-ng-click="delete(category)" ><i class="icon-white icon-remove"></i>{{'DELETE'|translate}}</button>
+				<button class="btn btn-success" data-ng-click="update(category)">{{'SAVE'|translate}}</button>
+				<button class="btn btn-danger" ng-hide="!category._id" data-ng-click="remove(category)" ><i class="icon-white icon-remove"></i>{{'DELETE'|translate}}</button>
 			</div>
 		</div>
-		<div ng-hide="category.categories.length">
-			<table class="table" data-ng-table="tableParams" data-show-filter="true">
-            	<tr data-ng-repeat="cate in category.categories">
+		<button class="btn btn-success" data-ng-click="create(category)">{{'ADD'|translate}}</button>
+		<div ng-hide="!categories.length">
+			<table class="table" data-ng-table="tableParams" data-show-filter="true" >
+            	<tr data-ng-repeat="cate in categories">
             		<td data-title="'Name'" header-class="text-left" sortable="'name'" filter="{ 'name': 'text' }" ><a href="#!/categories/{{cate._id}}">{{cate.name}} </a></td>
             		<td data-title="'Description'" header-class="text-left">{{cate.description}}</td>
             		<td>
-		            	<a href="#!/categories/{{cate._id}}" class="btn btn-warning"><i class="icon-white icon-pencil"></i> {{'EDIT'| translate}}</a>
-		            	<button class="btn btn-danger" data-ng-click="delete(cate)"><i class="icon-white icon-remove"></i>{{'DELETE'|translate}}</button>
+		            	<a href="#!/categories/{{cate._id}}" class="btn btn-warning btn-mini"><i class="icon-white icon-pencil"></i> {{'EDIT'| translate}}</a>
+		            	<button class="btn btn-danger btn-mini" data-ng-click="remove(cate)"><i class="icon-white icon-remove"></i>{{'DELETE'|translate}}</button>
 
             		</td>
         		</tr>
