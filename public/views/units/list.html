@@ -1,0 +1,14 @@
+<section data-ng-controller="UnitsController" data-ng-init="init()">
+<button data-ng-click="create()" class="btn btn-success"><i class="icon-white icon-plus"></i> {{'ADD'|translate}} </button>
+<table class="table" data-ng-table="tableParams" data-show-filter="true">
+        <tr data-ng-repeat="unit in units">
+            <td data-title="'Name'" header-class="text-left" sortable="'name'" filter="{ 'name': 'text' }" ><a href="#!/units/{{unit._id}}">{{unit.name}} </a></td>
+            <td data-title="'Description'" header-class="text-left">{{unit.description}}</td>
+            <td>
+            	<button data-ng-click="edit(unit._id)" class="btn btn-warning btn-mini"><i class="icon-white icon-pencil"></i> {{'EDIT'| translate}}</button>
+            	<button class="btn btn-danger btn-mini" data-ng-click="remove(unit)"><i class="icon-white icon-remove"></i>{{'DELETE'|translate}}</button>
+
+            </td>
+        </tr>
+        </table>	
+</section>

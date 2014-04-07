@@ -54,3 +54,23 @@ exports.category = {
         next();
     }
 };
+
+/**
+ * Unit authorizations routing middleware
+ */
+exports.unit = {
+    hasAuthorization: function(req, res, next) {
+        //allways pass
+        next();
+    }
+};
+
+/**
+ * Category authorizations routing middleware
+ */
+exports.item = {
+    hasAuthorization: function(req, res, next) {
+        //allways pass
+        next();
+    }
+};

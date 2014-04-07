@@ -35,6 +35,12 @@ angular.module('mean').config(['$routeProvider',
         when('/categories/:categoryId', {
             templateUrl: 'views/categories/edit.html'
         }).
+        when('/units', {
+            templateUrl: 'views/units/list.html'
+        }).
+         when('/units/:unitId', {
+            templateUrl: 'views/units/createOrEdit.html'
+        }).
         otherwise({
             redirectTo: '/'
         });

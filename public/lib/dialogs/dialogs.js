@@ -146,7 +146,7 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 				}); // end modal.open
 			}, // end confirm
 			
-			create : function(url,ctrlr,data,opts){
+			create : function(url,ctrlr,data,opts,scope){
 				var k = (angular.isDefined(opts.key)) ? opts.key : true;
 				var b = (angular.isDefined(opts.back)) ? opts.back : true;
 				return $modal.open({
@@ -156,7 +156,8 @@ angular.module('dialogs.services',['ui.bootstrap.modal','dialogs.controllers'])
 					backdrop : b,
 					resolve : {
 						data : function() { return angular.copy(data); }
-					}
+					},
+					scope: scope
 				}); // end modal.open
 			} // end confirm
 		};
