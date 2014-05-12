@@ -28,8 +28,14 @@ angular.module('mean.units').controller('UnitsController', ['$scope', '$routePar
                     dlg = $dialogs.create('/views/units/createOrEdit.html', 'UnitsController', {}, {}, $scope);
                     dlg.result.then(function (changedUnit) {
                         changedUnit.$update(function (response) {
-                            $location.path("units");
-                            notification.success('UnitsController', $translate('SAVESUCCESS'));
+                            var unit = $scope.units.filter(function(item){ return item._id == response._id})[0];
+                            if(unit != undefined) {
+                                unit.name = response.name;
+                                unit.description = response.description;
+                                unit.updated = response.updated;
+                                unit.updatedBy = response.updatedBy;
+                                notification.success('UnitsController', $translate('SAVESUCCESS'));
+                            } else  $dialogs.error('server error when save');
                         }, function (error) {
                             $dialogs.error('server error when save');
                         });

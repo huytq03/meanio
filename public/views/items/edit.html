@@ -1,0 +1,36 @@
+<section data-ng-controller="ItemsController" data-ng-init="findOne()">
+	<form class="form-horizontal">
+		<div class="control-group">
+			<label class="control-label" for="name">{{'NAME'|translate}}</label>
+			<div class="controls">
+				<input type="text" data-ng-model="item.name" id="name"  required>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="description">{{'DESCRIPTION'|translate}}</label>
+			<div class="controls">
+				<textarea data-ng-model="item.description" id="description"></textarea>
+			</div>
+		</div>		
+		<div class="control-group">
+			<div class="controls">
+				<button class="btn btn-success" data-ng-click="update(item)">{{'SAVE'|translate}}</button>
+				<button class="btn btn-danger" ng-hide="!item._id" data-ng-click="remove(item)" ><i class="icon-white icon-remove"></i>{{'DELETE'|translate}}</button>
+			</div>
+		</div>
+		<button class="btn btn-success" data-ng-click="create(item)">{{'ADD'|translate}}</button>
+		<div ng-hide="!items.length">
+			<table class="table" data-ng-table="tableParams" data-show-filter="true" >
+            	<tr data-ng-repeat="ite in items">
+            		<td data-title="'Name'" header-class="text-left" sortable="'name'" filter="{ 'name': 'text' }" ><a href="#!/items/{{ite._id}}">{{ite.name}} </a></td>
+            		<td data-title="'Description'" header-class="text-left">{{ite.description}}</td>
+            		<td>
+		            	<a href="#!/items/{{ite._id}}" class="btn btn-warning btn-mini"><i class="icon-white icon-pencil"></i> {{'EDIT'| translate}}</a>
+		            	<button class="btn btn-danger btn-mini" data-ng-click="remove(ite)"><i class="icon-white icon-remove"></i>{{'DELETE'|translate}}</button>
+
+            		</td>
+        		</tr>
+        	</table>	
+		</div>
+	</form>
+</section>

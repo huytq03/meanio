@@ -38,8 +38,14 @@ angular.module('mean').config(['$routeProvider',
         when('/units', {
             templateUrl: 'views/units/list.html'
         }).
-         when('/units/:unitId', {
+        when('/units/:unitId', {
             templateUrl: 'views/units/createOrEdit.html'
+        }).
+        when('/items/', {
+            templateUrl: 'views/items/list.html'
+        }).
+        when('/items/:itemId', {
+            templateUrl: 'views/items/edit.html'
         }).
         otherwise({
             redirectTo: '/'

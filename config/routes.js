@@ -99,6 +99,11 @@ module.exports = function(app, passport, auth) {
     app.put('/units/:unitId', auth.requiresLogin, auth.unit.hasAuthorization, units.update);
     app.del('/units/:unitId', auth.requiresLogin, auth.unit.hasAuthorization, units.destroy);
 
+    //upload file
+    var upload = require('../app/controllers/upload');
+    app.post("/uploads", upload.onUpload);
+    app.delete("/uploads/:uuid", upload.onDeleteFile);
+    
     //Finish with setting up the articleId param
     app.param('articleId', articles.article);
     app.param('vendorId', vendors.vendor);

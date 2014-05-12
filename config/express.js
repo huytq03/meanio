@@ -89,6 +89,9 @@ module.exports = function(app, passport, db) {
                 error: 'Not found'
             });
         });
-
+        //file upload        
+        app.use("/fineuploader", express.static(config.assetsPath));
+        app.use("/placeholders", express.static(config.placeholdersPath));
+        app.use("/uploads", express.static(config.uploadedFilesPath));
     });
 };

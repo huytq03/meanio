@@ -1,0 +1,18 @@
+<section data-ng-controller="ItemsController" data-ng-init="init()">
+<button data-ng-click="create()" class="btn btn-success"><i class="icon-white icon-plus"></i> {{'ADD'|translate}} </button>
+<table class="table" data-ng-table="tableParams" data-show-filter="true">
+        <tr data-ng-repeat="item in items">
+        	<td data-title="'Image'" header-class="text-left"><img src="{{item.images[0]}}" alt="{{item.name}}"></td>
+            <td data-title="'Name'" header-class="text-left" sortable="'name'" filter="{ 'name': 'text' }" ><a href="#!/items/{{item._id}}">{{item.name}} </a></td>
+            <td data-title="'Category'" header-class="text-left">{{item.category.name}}</td>
+            <td data-title="'Quantity'" header-class="text-left">{{item.quantity}}</td>
+            <td data-title="'Unit'" header-class="text-left">{{item.unit.name}}</td>
+            <td data-title="'Description'" header-class="text-left">{{item.description}}</td>
+            <td>
+            	<a href="#!/items/{{item._id}}" class="btn btn-warning btn-mini"><i class="icon-white icon-pencil"></i> {{'EDIT'| translate}}</a>
+            	<button class="btn btn-danger btn-mini" data-ng-click="remove(item)"><i class="icon-white icon-remove"></i>{{'DELETE'|translate}}</button>
+
+            </td>
+        </tr>
+        </table>	
+</section>

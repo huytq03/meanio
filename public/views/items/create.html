@@ -1,0 +1,33 @@
+<div class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><span class="glyphicon"></span> {{'ADDNEWHEADER' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+            	<ng-form name="itemDialog" novalidate role="form">
+                    <!--upload file-->
+                    <div fine-uploader
+                        upload-server="/uploads"
+                        not-available-placeholder="/lib/not_available-generic.png"
+                        waiting-placeholder="/lib/waiting-generic.png"
+                        max-file-size="10000000"
+                        large-preview-size="500"
+                        allowed-mimes="image/jpeg, image/png, image/gif, image/tiff, image/bmp"
+                        allowed-extensions="jpeg, jpg, png, gif, tiff, tif, bmp"></div>
+                    <!--end upload file-->
+                    <div class="form-group input-group-lg">
+                        <label class="control-label" for="name">{{'NAME' | translate}}:</label>
+                        <input type="text" class="form-text" name="name" id="name" ng-model="name" placeholder="name" required>
+                        <label class="control-label" for="description">{{'DESCRIPTION' | translate}}:</label>
+                        <textarea data-ng-model="description" id="description" cols="30" rows="5" placeholder="description" class="form-textarea"> </textarea>
+                    </div>
+                </ng-form>            	
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="cancel()">{{'CANCEL' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="(itemDialog.$dirty && itemDialog.$invalid) || itemDialog.$pristine">{{'SAVE' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
